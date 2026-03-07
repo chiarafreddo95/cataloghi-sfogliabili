@@ -27,19 +27,35 @@
 
 <body>
     <script>
-      // Fix per barra di avanzamento su mobile
+      // Fix per barra di avanzamento su mobile (orientamento)
       if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        window.addEventListener('load', function() {
-          const iframe = document.querySelector('.fp-iframe');
+        const iframe = document.querySelector('.fp-iframe');
+        
+        // Funzione per forzare il refresh dell'iframe
+        function refreshIframe() {
           if(iframe) {
-            // Forza il refresh della barra ogni secondo
-            setInterval(function() {
-              iframe.style.height = (window.innerHeight - 1) + 'px';
-              setTimeout(function() {
-                iframe.style.height = '100vh';
-              }, 50);
-            }, 3000);
+            // Ricarica l'iframe per forzare il ricalcolo
+            const src = iframe.src;
+            iframe.src = '';
+            setTimeout(() => {
+              iframe.src = src;
+            }, 100);
           }
+        }
+        
+        // Rileva il cambio di orientamento
+        window.addEventListener('orientationchange', function() {
+          setTimeout(refreshIframe, 500);
+        });
+        
+        // Rileva ridimensionamento viewport
+        window.addEventListener('resize', function() {
+          setTimeout(refreshIframe, 500);
+        });
+        
+        // Anche al caricamento iniziale
+        window.addEventListener('load', function() {
+          setTimeout(refreshIframe, 1000);
         });
       }
     </script>
