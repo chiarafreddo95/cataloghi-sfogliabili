@@ -9,15 +9,40 @@
      <iframe allowfullscreen="allowfullscreen" allow="clipboard-write" scrolling="no" class="fp-iframe" src="https://heyzine.com/flip-book/c28dfab8ba.html?transparent=1&mobile=true" style="border: 1px solid lightgray; width: 100%; height: 100vh;"></iframe>
 
      <style>
-
-
+       body, html {
+         margin: 0;
+         padding: 0;
+         width: 100%;
+         height: 100%;
+         overflow: hidden;
+       }
        
+       .fp-iframe {
+         display: block;
+       }
      </style>
 
 </head>
 
 
 <body>
+    <script>
+      // Fix per barra di avanzamento su mobile
+      if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.addEventListener('load', function() {
+          const iframe = document.querySelector('.fp-iframe');
+          if(iframe) {
+            // Forza il refresh della barra ogni secondo
+            setInterval(function() {
+              iframe.style.height = (window.innerHeight - 1) + 'px';
+              setTimeout(function() {
+                iframe.style.height = '100vh';
+              }, 50);
+            }, 3000);
+          }
+        });
+      }
+    </script>
     
 
 
