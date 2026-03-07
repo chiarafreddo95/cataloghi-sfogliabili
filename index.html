@@ -18,28 +18,8 @@
 
 
 <body>
-    <script>
-      // Fix per barra di avanzamento su mobile landscape
-      const iframe = document.querySelector('.fp-iframe');
-      
-      window.addEventListener('orientationchange', function() {
-        if(iframe) {
-          // Aspetta che il DOM si adatti al nuovo orientamento
-          setTimeout(function() {
-            // Ricarica l'iframe forzando il ricalcolo di Heyzine
-            const src = iframe.src;
-            iframe.src = '';
-            setTimeout(function() {
-              iframe.src = src;
-            }, 100);
-          }, 300);
-        }
-      });
-    </script>
+
     
-
-
-
 
 
 
